@@ -25,7 +25,7 @@ let total = numeros.reduce((acumulador, numero, index, original) => {
 console.log(`Total do reduce - ${total}`);
 */
 
-//FIND busca nunma lista e devolve o primeiro item que encontrar
+//FIND busca numa lista e devolve o primeiro item que encontrar
 let listagem = [5, 3, 'Jose', 2, 'Maria'];
 
 let busca = listagem.find(item => {
