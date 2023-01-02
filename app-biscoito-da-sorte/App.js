@@ -3,21 +3,38 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
 function App() {
   const [img, setImg] = useState(require('./assets/biscoito.png'));
+  const [textoFrase, setTextoFrase] = useState('');
+  let frases = [
+    'Siga os bons e aprenda com eles',
+    'O bom senso vale mais do que muito conhecimento',
+    'O riso é a menor distancia entre duas pessoas',
+    'Deixe de lado as preocupações e seja feliz',
+    'Acredite em milagres, mas não dependa deles'
+  ];
 
+  function quebraBiscoito() {
+    let numeroAleatorio = Math.floor(Math.random() * frases.length);
+    setTextoFrase('"' + frases[numeroAleatorio] + '"');
+
+    setImg(require('./assets/biscoitoAberto.png'));
+  }
+
+  function reiniciar() {
+    setImg(require('./assets/biscoito.png'));
+    setTextoFrase('');
+  }
   return (
     <View style={styles.container}>
       <Image source={img} style={styles.img} />
-      <Text style={styles.textofrase}>
-        "esta é minha primeira frase do biscoito"
-      </Text>
-      <TouchableOpacity style={styles.botao} onPress={() => alert('')}>
+      <Text style={styles.textofrase}>{textoFrase}</Text>
+      <TouchableOpacity style={styles.botao} onPress={quebraBiscoito}>
         <View style={styles.btnArea}>
           <Text style={styles.btnTexto}>Quebrar biscoito</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity
         style={[styles.botao, { marginTop: 15, borderColor: '#121212' }]}
-        onPress={() => alert('')}
+        onPress={reiniciar}
       >
         <View style={styles.btnArea}>
           <Text style={[styles.btnTexto, { color: '#121212' }]}>
