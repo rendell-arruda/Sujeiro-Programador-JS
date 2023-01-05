@@ -7,6 +7,7 @@ export default function Cliente(props) {
       <Text> Seja bem Vindo</Text>
       <Text> {props.nome}</Text>
       <Text> {props.idade} Anos</Text>
+      <Text> {props.sexoSelecionado}</Text>
     </View>
   );
 }

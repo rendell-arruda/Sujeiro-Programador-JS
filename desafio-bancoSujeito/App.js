@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Picker } from '@react-native-picker/picker';
 import {
   StyleSheet,
   Text,
@@ -9,12 +10,25 @@ import {
   TextInput,
   TouchableOpacity
 } from 'react-native';
+
 import Button from './src/Button';
 import Cliente from './src/Cliente';
 
 export default function App() {
   const [nome, setNome] = useState('');
   const [idade, setIdade] = useState('');
+
+  const [sexoSelecionado, setSexoSelecionado] = useState(0);
+
+  const [sexo, setSexo] = useState([
+    { key: 1, nome: 'Masculino' },
+    { key: 2, nome: 'Feminino' },
+    { key: 3, nome: 'Outro' }
+  ]);
+
+  let sexoItem = sexo.map((v, k) => {
+    return <Picker.Item key={k} value={k} label={v.nome} />;
+  });
 
   const [status, setStatus] = useState(false);
 
@@ -53,6 +67,12 @@ export default function App() {
       {/*  */}
 
       {/* PICKER */}
+      <Picker
+        selectedValue={sexoSelecionado}
+        onValueChange={(itemValue, itemIndex) => setSexoSelecionado(itemValue)}
+      >
+        {sexoItem}
+      </Picker>
       {/*  */}
       {/* SLIDER */}
       {/*  */}
@@ -76,6 +96,7 @@ export default function App() {
 
       {/* CLIENTE */}
       <Cliente nome={nome} idade={idade} />
+      <Text>{sexo[sexoSelecionado].nome}</Text>
     </SafeAreaView>
   );
 }
