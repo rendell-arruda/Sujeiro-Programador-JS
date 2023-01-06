@@ -33,7 +33,7 @@ export default function App() {
 
   const [status, setStatus] = useState(false);
 
-  const [limite, setLimiteSelecionado] = useState('');
+  const [limite, setLimiteSelecionado] = useState(0);
 
   return (
     <ScrollView>
@@ -48,7 +48,6 @@ export default function App() {
             }}
           />
         </View>
-
         {/* IMPUT */}
         <View style={styles.area}>
           <Text style={styles.inputText}>Informe os seus dados</Text>
@@ -70,7 +69,6 @@ export default function App() {
           />
         </View>
         {/*  */}
-
         {/* PICKER */}
         <View style={[styles.pickerArea, styles.area]}>
           <Text style={styles.pickerText}>Selecione o seu Sexo</Text>
@@ -97,27 +95,37 @@ export default function App() {
           <Text style={{ textAlign: 'center' }}>R$ {limite.toFixed(0)},00</Text>
         </View>
         {/*  */}
-
         {/* SWITCH */}
-        <Switch
-          value={status}
-          onValueChange={valorSelecionado => {
-            setStatus(valorSelecionado);
-          }}
-          trackColor={{ false: '#121212', true: '#00ff00' }}
-          thumbColor={status ? '#121212' : '#f4f4f4'}
-        />
-        <Text style={{ textAlign: 'center', fontSize: 25 }}>
-          Status: {status ? 'ATIVO' : 'Inativo'}
-        </Text>
-        {/*  */}
-
+        <View style={styles.area}>
+          <Switch
+            value={status}
+            onValueChange={valorSelecionado => {
+              setStatus(valorSelecionado);
+            }}
+            trackColor={{ false: '#121212', true: '#00ff00' }}
+            thumbColor={status ? '#121212' : '#f4f4f4'}
+          />
+          <Text style={{ textAlign: 'center', fontSize: 25 }}>
+            Status: {status ? 'ATIVO' : 'Inativo'}
+          </Text>
+          {/*  */}
+        </View>
         {/* BOTAO */}
         <Button />
-
+        {/* tornar visivel se o nome estiver preenchido
+        {nome ? (
+          <View style={styles.area}>
+            <Cliente
+              nome={nome}
+              idade={idade}
+              sexo={sexo[sexoSelecionado].nome}
+              limite={limite.toFixed(0)}
+            />
+          </View>
+        ) : (
+          ''
+        )} */}
         {/* CLIENTE */}
-        {/* <Cliente nome={nome} idade={idade} /> */}
-        {/* <Text>{sexo[sexoSelecionado].nome}</Text> */}
       </SafeAreaView>
     </ScrollView>
   );
