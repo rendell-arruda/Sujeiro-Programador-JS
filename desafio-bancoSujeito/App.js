@@ -9,13 +9,37 @@ import {
   Image,
   SafeAreaView,
   TextInput,
-  ScrollView
+  ScrollView,
+  TouchableOpacity
 } from 'react-native';
 
-import Button from './src/Button';
 import Cliente from './src/Cliente';
 
 export default function App() {
+  function enviarDados() {
+    if (nome === '' || idade === '') {
+      alert('Preencha todos os dados corretamente');
+      return;
+    }
+    alert(
+      'Conta aberta com sucesso!! \n\n' +
+        'Nome: ' +
+        nome +
+        '\n' +
+        'Idade: ' +
+        idade +
+        '\n' +
+        'Sexo: ' +
+        sexo[sexoSelecionado].nome +
+        ' \n' +
+        'Limite Conta: ' +
+        limite.toFixed(2) +
+        '\n' +
+        'Conta Estudante: ' +
+        (status ? 'Ativo' : 'Inativo')
+    );
+  }
+
   const [nome, setNome] = useState('');
   const [idade, setIdade] = useState('');
 
@@ -106,14 +130,18 @@ export default function App() {
             thumbColor={status ? '#121212' : '#f4f4f4'}
           />
           <Text style={{ textAlign: 'center', fontSize: 25 }}>
-            Status: {status ? 'ATIVO' : 'Inativo'}
+            Status: {status ? 'Estudante' : 'Não Estudante'}
           </Text>
           {/*  */}
         </View>
         {/* BOTAO */}
-        <Button />
-        {/* tornar visivel se o nome estiver preenchido
-        {nome ? (
+        <View>
+          <TouchableOpacity style={styles.button} onPress={enviarDados}>
+            <Text style={styles.buttonText}>Cadastra-se </Text>
+          </TouchableOpacity>
+        </View>
+        {/* tornar visivel se o nome estiver preenchido */}
+        {/* {nome ? (
           <View style={styles.area}>
             <Cliente
               nome={nome}
@@ -176,5 +204,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#121212',
     color: '#fff',
     padding: 10
+  },
+  button: {
+    padding: 10,
+    backgroundColor: '#570AB3',
+    margin: 20,
+    borderRadius: 10
+  },
+  buttonText: {
+    color: '#FAF8FE',
+    fontSize: 16,
+    textAlign: 'center'
   }
 });
