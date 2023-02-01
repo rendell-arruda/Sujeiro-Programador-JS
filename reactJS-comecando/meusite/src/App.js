@@ -1,51 +1,48 @@
-import React from 'react';
-import { Component } from 'react';
+import React, { Component } from 'react';
 
-class Equipe extends Component {
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      nome: 'Mateus',
+      counter: 0
+    };
+    this.aumentar = this.aumentar.bind(this);
+    this.diminuir = this.diminuir.bind(this);
+  }
+
+  aumentar() {
+    let state = this.state;
+    state.counter += 1;
+    state.nome = 'José';
+    console.log('aumentou');
+    this.setState(state);
+  }
+
+  diminuir() {
+    let state = this.state;
+    if (state.counter === 0) {
+      alert('Chegou  a zero');
+      return;
+    } else {
+      state.counter -= +1;
+      this.setState(state);
+    }
+  }
+
   render() {
     return (
       <div>
-        <Sobre
-          nome={this.props.nome}
-          cargo={this.props.cargo}
-          idade={this.props.idade}
-        />
-        <hr />
+        <h1>Contador</h1>
+        {this.state.nome}
+        <h3>
+          <button onClick={this.diminuir}>-</button>
+          {this.state.counter}
+          <button onClick={this.aumentar}>+</button>
+        </h3>
       </div>
     );
   }
-}
-
-class Sobre extends Component {
-  render() {
-    return (
-      <div>
-        <h2>Olá eu sou o(a) {this.props.nome}</h2>
-        <h3>{this.props.cargo}</h3>
-        <h3> {this.props.idade} anos</h3>
-        <Social />
-      </div>
-    );
-  }
-}
-
-const Social = () => {
-  return (
-    <div>
-      <a>Facebook </a>
-      <a>LinkedIn </a>
-    </div>
-  );
-};
-
-function App() {
-  return (
-    <div>
-      <h1>Conheça nossa equipe</h1>
-      <Equipe nome="Mateus" cargo="Programador" idade="34" />
-      <Equipe nome="Lucas" cargo="UX" idade="39" />
-    </div>
-  );
 }
 
 export default App;
