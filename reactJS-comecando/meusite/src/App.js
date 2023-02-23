@@ -1,10 +1,31 @@
 import React from 'react';
 
-const Bemvindo = props => {
+const Equipe = props => {
   return (
     <div>
-      <h2>Bem vindo {props.nome}</h2>
-      <h3>Tenho {props.idade} anos</h3>
+      <Sobre username={props.nome} cargo={props.cargo} idade={props.idade} />
+      <Social fb={props.facebook} />
+      <hr />
+    </div>
+  );
+};
+
+const Sobre = props => {
+  return (
+    <div>
+      <h2>Olá sou o {props.username}</h2>
+      <h3>Cargo: {props.cargo}</h3>
+      <h3>Idade: {props.idade} anos</h3>
+    </div>
+  );
+};
+
+const Social = props => {
+  return (
+    <div>
+      <a href={props.fb}>Facebook </a>
+      <a>LinkedIn </a>
+      <a>Youtube</a>
     </div>
   );
 };
@@ -12,9 +33,25 @@ const Bemvindo = props => {
 function App() {
   return (
     <div>
-      <Bemvindo nome="Mateus" idade="29" />
-      <Bemvindo nome="Amanda" idade="27" />
-      <h1>Olá Mundo</h1>
+      <h1>Conheça nossa equipe</h1>
+      <Equipe
+        nome="Lucas"
+        cargo="Programador"
+        idade="29"
+        facebook="https://www.facebook.com/"
+      />
+      <Equipe
+        nome="Ricardo"
+        cargo="Designe"
+        idade="18"
+        facebook="https://www.facebook.com/"
+      />
+      <Equipe
+        nome="Amanda"
+        cargo="Backend"
+        idade="38"
+        facebook="https://www.facebook.com/"
+      />
     </div>
   );
 }
