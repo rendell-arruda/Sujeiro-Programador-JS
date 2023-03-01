@@ -17,10 +17,10 @@ header {
 
 .favoritos {
   cursor: pointer;
-  background-color: #fff;
+  background-color: #5d3fd3;
+  color: #e3e1fa;
   padding: 5px 14px;
   text-decoration: none;
-  color: #000;
   border-radius: 4px;
   transition: all 0.3s;
 }
