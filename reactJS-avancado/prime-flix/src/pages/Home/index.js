@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import api from '../../services/api';
 
 function Home() {
-  const [filmes, setFilmes] = useState([]);
+  const [filme, setFilme] = useState([]);
 
   useEffect(() => {
     async function loadFilmes() {
@@ -20,6 +20,7 @@ function Home() {
 
     loadFilmes();
   }, []);
+
   return (
     <div>
       <h1>Bem vindo a Home</h1>
