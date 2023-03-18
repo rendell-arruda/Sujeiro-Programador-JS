@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './app.css';
 import { db } from './firebaseConnection';
-import { doc, setDoc, collection, addDoc } from 'firebase/firestore'
+import { doc, setDoc, collection, addDoc, getDoc } from 'firebase/firestore'
 
 function App() {
   const [titulo, setTitulo] = useState('');
@@ -36,6 +36,18 @@ function App() {
 
   }
 
+  async function buscarPost() {
+    const postRef = doc(db, 'posts', 'fiEj5eTKRQOPSgyYMmtl')
+    await getDoc(postRef)
+      .then((snapshot) => {
+        setAutor(snapshot.data().autor)
+        setTitulo(snapshot.data().titulo)
+      })
+      .catch(() => {
+        console.log('erro ao buscar')
+      })
+  }
+
   return (
     <div className="App">
       <h1>ReactJS+firebase :)</h1>
@@ -54,6 +66,7 @@ function App() {
           onChange={(e) => setAutor(e.target.value)} />
 
         <button onClick={handleAdd}>Cadastrar</button>
+        <button onClick={buscarPost}>Buscar post</button>
       </div>
     </div>
   );
