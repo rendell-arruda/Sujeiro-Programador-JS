@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './app.css';
 import { db } from './firebaseConnection';
-import { doc, setDoc } from 'firebase/firestore'
+import { doc, setDoc, collection, addDoc } from 'firebase/firestore'
 
 function App() {
   const [titulo, setTitulo] = useState('');
@@ -9,17 +9,31 @@ function App() {
 
 
   async function handleAdd() {
-    await setDoc(doc(db, 'posts', '12345'), {
+    // await setDoc(doc(db, 'posts', '12345'), {
+    //   titulo: titulo,
+    //   autor: autor,
+    // })
+    //   .then(() => {
+    //     console.log('dados registrados no banco')
+
+    //   })
+    //   .catch((error) => {
+    //     console.log('Gerrou erro' + error)
+    //   })
+
+    await addDoc(collection(db, 'posts'), {
       titulo: titulo,
-      autor: autor,
+      autor: autor
     })
       .then(() => {
-        console.log('dados registrados no banco')
-
+        console.log('Cadastrado com sucesso')
+        setAutor(' ')
+        setTitulo(' ')
       })
       .catch((error) => {
-        console.log('Gerrou erro' + error)
+        console.log("Error" + error)
       })
+
   }
 
   return (
