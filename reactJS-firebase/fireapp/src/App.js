@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './app.css';
 import { db } from './firebaseConnection';
 import {
@@ -9,7 +9,8 @@ import {
   getDoc,
   getDocs,
   updateDoc,
-  deleteDoc
+  deleteDoc,
+  onSnapshot
 } from 'firebase/firestore';
 import { async } from '@firebase/util';
 
@@ -18,6 +19,23 @@ function App() {
   const [autor, setAutor] = useState('');
   const [idPost, setIdPost] = useState('');
   const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    async function loadPosts() {
+      const unsub = onSnapshot(collection(db, 'posts'), snapshot => {
+        let listPost = [];
+        snapshot.forEach(doc => {
+          listPost.push({
+            id: doc.id,
+            titulo: doc.data().titulo,
+            autor: doc.data().autor
+          });
+        });
+        setPosts(listPost);
+      });
+    }
+    loadPosts();
+  }, []);
 
   async function handleAdd() {
     // await setDoc(doc(db, 'posts', '12345'), {
@@ -101,7 +119,6 @@ function App() {
         alert('Post deletado com sucesso');
       })
       .catch(() => {});
-    buscarPost();
   }
 
   return (
