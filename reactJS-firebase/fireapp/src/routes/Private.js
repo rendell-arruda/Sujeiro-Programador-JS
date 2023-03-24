@@ -18,7 +18,7 @@ export default function Private({ children }) {
             email: user.email
           };
 
-          localStorage.setItem('@datailUser', JSON.stringify(userData));
+          localStorage.setItem('@detailUser', JSON.stringify(userData));
           setLoading(false);
           setSigned(true);
         } else {
