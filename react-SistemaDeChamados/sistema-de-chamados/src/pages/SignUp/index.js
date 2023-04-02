@@ -8,13 +8,20 @@ export default function SignUp() {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (name !== '' && email !== '' && password !== '') {
+      alert('cadastro realizado');
+    }
+  }
+
   return (
     <div className="container-center">
       <div className="login">
         <div className="login-area">
           <img src={logo} alt="Logo do sistema de chamados" />
         </div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <h1>Cadastrar nova conta</h1>
           <input
             type="text"
