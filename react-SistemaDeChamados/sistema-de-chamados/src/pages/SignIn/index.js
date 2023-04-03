@@ -10,6 +10,7 @@ export default function SignIn() {
   const [password, setPassword] = useState('');
 
   const { signIn } = useContext(AuthContext);
+
   function handleSignIn(e) {
     e.preventDefault();
     if (email !== '' && password !== '') {
