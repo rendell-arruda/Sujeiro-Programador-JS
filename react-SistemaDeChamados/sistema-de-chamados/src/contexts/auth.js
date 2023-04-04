@@ -2,6 +2,9 @@ import { useState, createContext, useEffect } from 'react';
 import { auth, db } from '../services/firebaseConnections';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { toast } from 'react-toastify';
+
+import { useNavigate } from 'react-router-dom';
 
 //criacao do context
 export const AuthContext = createContext({});
@@ -10,6 +13,7 @@ export const AuthContext = createContext({});
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loadingAuth, setLoadingAuth] = useState(false);
+  const navigate = useNavigate();
 
   function signIn(email, password) {
     console.log(email);
@@ -35,7 +39,10 @@ export default function AuthProvider({ children }) {
             avatarUrl: null
           };
           setUser(data);
+          storageUser(data);
           setLoadingAuth(false);
+          toast.success('Seja bem-vindo ao sistema!');
+          navigate('/dashboard');
         });
       })
 
@@ -44,6 +51,11 @@ export default function AuthProvider({ children }) {
         setLoadingAuth(false);
       });
   }
+
+  function storageUser(data) {
+    localStorage.setItem('@ticketsPRO', JSON.stringify(data));
+  }
+
   return (
     <AuthContext.Provider
       value={{
